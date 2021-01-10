@@ -42,15 +42,15 @@ public class QueueManager {
             queue.offer(new Thread(new BidLogger(bid)));
         }
 
-        logAllBids(queueByBidType);
+        runAllThreads(queueByBidType);
     }
 
     /**
-     * logs bids in queues
+     * logs bids in queues by running Threads, each Thread logs bid content when run
      * each logged Bid Thread is removed from queue
      * @param queueByBidType
      */
-    private static void logAllBids(Map<String, Queue<Thread>> queueByBidType){
+    private static void runAllThreads(Map<String, Queue<Thread>> queueByBidType){
         ExecutorService executor = Executors.newSingleThreadExecutor();
         for (Queue<Thread> queue : queueByBidType.values()) {
             Iterator<Thread> it = queue.iterator();
